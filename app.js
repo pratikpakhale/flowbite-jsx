@@ -5,6 +5,10 @@ const app = express()
 
 app.use(express.text())
 
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html')
+})
+
 app.post('/', (req, res) => {
   const html = req.body.replace(/class="([^"]*)"/g, (match, classValue) => {
     const modifiedClassValue = classValue

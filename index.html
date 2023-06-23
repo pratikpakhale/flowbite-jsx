@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTML to API</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f1f1f1;
+      }
+      h1 {
+        margin-bottom: 20px;
+        text-align: center;
+        color: #333;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+      }
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      textarea {
+        width: 96%;
+        height: 200px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        resize: vertical;
+      }
+      button {
+        margin-top: 10px;
+        padding: 8px 16px;
+        background-color: #4287f5;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      #response {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>HTML to JSX</h1>
+      <label for="htmlInput">HTML Input:</label>
+      <textarea
+        id="htmlInput"
+        placeholder="Enter HTML here"
+        oninput="callAPI()"
+      ></textarea>
+      <button onclick="sendHTML()">Submit</button>
+      <br /><br />
+      <label for="response">Response:</label>
+      <textarea id="response" readonly></textarea>
+    </div>
+
+    <script>
+      function callAPI() {
+        clearTimeout(window.timer)
+        window.timer = setTimeout(sendHTML, 500)
+      }
+
+      function sendHTML() {
+        const htmlData = document.getElementById('htmlInput').value
+        const apiUrl = '/' // Replace with your API endpoint URL
+
+        fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain',
+          },
+          body: htmlData,
+        })
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('response').value = data
+          })
+          .catch(error => {
+            console.error('Error:', error)
+            document.getElementById('response').value = 'An error occurred.'
+          })
+      }
+    </script>
+  </body>
+</html>

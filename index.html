@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>HTML to API</title>
+    <title>HTML to JSX</title>
     <style>
       body {
         font-family: Arial, sans-serif;
         margin: 0;
-        padding: 20px;
+        /* padding: 10px; */
         background-color: #f1f1f1;
       }
       h1 {
@@ -46,11 +46,22 @@
       #response {
         margin-top: 20px;
       }
+      .copy-button {
+        display: inline-block;
+        margin-left: 10px;
+        padding: 8px 16px;
+        background-color: #333;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <h1>HTML to JSX</h1>
+
       <label for="htmlInput">HTML Input:</label>
       <textarea
         id="htmlInput"
@@ -58,6 +69,7 @@
         oninput="callAPI()"
       ></textarea>
       <button onclick="sendHTML()">Submit</button>
+      <button class="copy-button" onclick="copyResponse()">Copy Output</button>
       <br /><br />
       <label for="response">Response:</label>
       <textarea id="response" readonly></textarea>
@@ -88,6 +100,11 @@
             console.error('Error:', error)
             document.getElementById('response').value = 'An error occurred.'
           })
+      }
+      function copyResponse() {
+        const responseTextArea = document.getElementById('response')
+        responseTextArea.select()
+        document.execCommand('copy')
       }
     </script>
   </body>
